@@ -1,0 +1,89 @@
+@use "sass:map"
+@use "../config" as *
+
+// texts
+
+.text--normal
+    font-style: normal !important
+
+.text--italic
+    font-style: italic !important
+
+.text--wxl
+    font-weight: 100 !important
+
+.text--wl
+    font-weight: 300 !important
+
+.text--wr
+    font-weight: 400 !important
+
+.text--wm
+    font-weight: 500 !important
+
+.text--wsb
+    font-weight: 600 !important
+
+.text--wb
+    font-weight: 700 !important
+
+.text--wxb
+    font-weight: 900 !important
+
+.text--left
+    text-align: left !important
+
+.text--right
+    text-align: right !important
+
+.text--center
+    text-align: center !important
+
+.text--justify
+    text-align: justify !important
+
+.text--nowrap
+    white-space: nowrap !important
+
+.text--none
+    text-decoration: none !important
+
+.text--under
+    text-decoration: underline !important
+
+.text--strike
+    text-decoration: line-through !important
+
+.text--ncase
+    text-transform: none !important
+
+.text--lowercase
+    text-transform: lowercase !important
+
+.text--uppercase
+    text-transform: uppercase !important
+
+.text--capitalize
+    text-transform: capitalize !important
+
+.text--firstupper:first-letter,
+.text--firstupper *:first-letter
+    text-transform: uppercase !important
+
+
+// fonts
+@each $class-name, $family in $fonts-families
+    .text--#{$class-name}
+        font-family: $family !important
+
+
+// sizes
+@each $class-name, $size in $fonts-sizes
+    .text--#{$class-name}
+        font-size: $size !important
+
+
+// colors
+@each $class-name, $color in $fonts-colors
+    .text--#{$class-name}
+        color: $color !important

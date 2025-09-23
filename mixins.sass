@@ -1,0 +1,88 @@
+@use "sass:map"
+@use "sass:meta"
+@use "sass:color"
+@use "../config" as *
+
+
+// breakpoints
+=media-breakpoint-up($breakpoint)
+  $value: if(meta.type-of($breakpoint) == "string", map.get($grid-breakpoints, $breakpoint), $breakpoint)
+
+  @media (min-width: $value)
+    @content
+
+=media-breakpoint-down($breakpoint)
+  $value: if(meta.type-of($breakpoint) == "string", map.get($grid-breakpoints, $breakpoint), $breakpoint)
+  $max: $value - 1px
+
+  @media (max-width: $max)
+    @content
+
+
+// transition
+=transition($p: all, $d: 300ms, $t: linear)
+  transition: $p $d $t
+
+
+// colors
+=color-text($normal, $hover: null)
+  color: $normal
+
+  @if $hover != null
+    &:hover
+      @if meta.type-of($hover) == "color"
+        color: $hover
+
+      @else if meta.type-of($hover) == "number"
+        color: color.adjust($normal, $lightness: $hover)
+
+=color-bg($normal, $hover: null)
+  background-color: $normal
+
+  @if $hover != null
+    &:hover
+      @if meta.type-of($hover) == "color"
+        background-color: $hover
+
+      @else if meta.type-of($hover) == "number"
+        background-color: color.adjust($normal, $lightness: $hover)
+
+=color-theme($text, $bg, $text-hover: null, $bg-hover: null)
+  +color-text($text, $text-hover)
+  +color-bg($bg, $bg-hover)
+
+
+// links
+=link($link, $hover)
+  &
+    color: $link
+
+    &:hover
+      color: $hover
+
+
+// colors
+@function color($key)
+  @if map.has-key($colors, $key)
+    @return map.get($colors, $key)
+
+  @warn "Unknown `#{$key}` in $colors."
+  @return null
+
+
+// font-family
+@function font-family($key)
+  @if map.has-key($fonts-families, $key)
+    @return map.get($fonts-families, $key)
+
+  @warn "Unknown `#{$key}` in $font-family."
+  @return null
+
+
+// font-size
+@function font-size($key)
+  @if map.has-key($fonts-sizes, $key)
+    @return map.get($fonts-sizes, $key)
+
+  @warn "Unknown `#{$key}` in $font-size."
+  @return null

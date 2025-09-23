@@ -1,0 +1,72 @@
+@use "sass:map"
+@use '../config' as *
+@use 'mixins' as *
+
+$response-output: map.get($contact_form, 'response-output')
+$not-valid-tip: map.get($contact_form, 'not-valid-tip')
+$list-item-label: map.get($contact_form, 'list-item-label')
+$list-item-label-block: map.get($contact_form, 'list-item-label-block')
+
+.wpcf7
+    form
+        .wpcf7-response-output
+            display: none
+            text-align: center
+            color: color('white')
+            border: map.get($response-output, border)
+            border-radius: map.get($response-output, border-radius)
+            margin: map.get($response-output, margin)
+            padding: map.get($response-output, padding)
+
+        &.failed .wpcf7-response-output,
+        &.invalid .wpcf7-response-output,
+        &.sent .wpcf7-response-output,
+        &.spam .wpcf7-response-output
+            display: block
+
+        &.invalid .wpcf7-response-output,
+        &.failed .wpcf7-response-output,
+        &.spam .wpcf7-response-output
+            background: color('error')
+
+        &.sent .wpcf7-response-output
+            background: color('success')
+
+
+    &-form
+        .wpcf7-not-valid 
+            border-color: color('error')
+
+            + .select2-container--default .select2-selection--single
+                border-color: color('error')
+
+        .wpcf7-not-valid-tip
+            display: inline-block
+            font-size: map.get($not-valid-tip, font-size)
+            color: map.get($not-valid-tip, color)
+            background: map.get($not-valid-tip, background)
+            border-radius: map.get($not-valid-tip, border-radius)
+            margin: map.get($not-valid-tip, margin)
+            padding: map.get($not-valid-tip, padding)
+            cursor: pointer
+
+        .wpcf7-list-item
+            margin: 0
+
+        .wpcf7-list-item-label
+            font-size: map.get($list-item-label, font-size)
+            font-weight: map.get($list-item-label, font-weight)
+            color: map.get($list-item-label, color)
+
+            .block
+                display: block
+                font-size: map.get($list-item-label-block, font-size)
+                font-weight: map.get($list-item-label-block, font-weight)
+                color: map.get($list-item-label-block, color)
+                margin-left: map.get($list-item-label-block, margin-left)
+
+        .wpcf7-spinner
+            position: absolute
+            top: 50%
+            transform: translateY(-50%)
+            margin: 0 10px

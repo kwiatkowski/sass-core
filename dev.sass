@@ -1,0 +1,84 @@
+@use "../config" as *;
+
+.bar.bar--dev
+    position: fixed
+    top: 0
+    right: 0
+    z-index: 1001
+
+.dev__btn
+    display: block
+    width: 40px
+    height: 40px
+    background-color: #2a292e
+    position: fixed
+    top: 0
+    right: 0
+    z-index: 1000
+    color: #fff
+    line-height: 35px
+    text-align: center
+
+    &:hover
+        background-color: #1b1a1f
+
+.dev
+    .section,
+    .header,
+    .footer,
+    .container,
+    .container-fluid,
+    .col,
+    [class^="col-"], [class*=" col-"]
+        position: relative
+        // margin-bottom: -1px
+
+        &:before,
+        &:after
+            content: ''
+            display: block
+            width: calc($grid-gutter-width / 2)
+            height: 100%
+            position: absolute
+            top: 0
+
+        &:before
+            left: 0
+
+        &:after
+            right: 0
+
+    .section,
+    .header,
+    .footer
+        box-shadow: inset 0px 0px 0px 1px rgba(126, 48, 175, .2)
+
+        &:before,
+        &:after
+            background: rgba(126, 48, 175, .1)
+            box-shadow: inset 0px 0px 0px 1px rgba(126, 48, 175, .2)
+
+    .container,
+    .container-fluid
+        box-shadow: inset 0px 0px 0px 1px rgba(79, 171, 232, .2)
+
+        &:before,
+        &:after
+            background: rgba(79, 171, 232, .1)
+            box-shadow: inset 0px 0px 0px 1px rgba(79, 171, 232, .2)
+
+    .col,
+    [class^="col-"], [class*=" col-"]
+        box-shadow: inset 0px 0px 0px 1px rgba(191, 47, 125, .2)
+
+        &:before,
+        &:after
+            background: rgba(191, 47, 125, .1)
+            box-shadow: inset 0px 0px 0px 1px rgba(191, 47, 125, .2)
+
+pre
+    padding: 10px
+    font-family: Verdana
+    font-size: 10px
+    background-color: #272822
+    color: #c9c9c7

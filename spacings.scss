@@ -1,0 +1,57 @@
+@use "sass:meta";
+@use "../config" as *;
+
+// spacings
+
+.m, .m-0 {
+    margin: 0 !important;
+}
+
+.mt, .mt-0 {
+  margin-top: 0 !important;
+}
+
+.mb, .mb-0 {
+  margin-bottom: 0 !important;
+}
+
+.my, .my-0 {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+.ml, .ml-0 {
+  margin-left: 0 !important;
+}
+
+.mr, .mr-0 {
+  margin-right: 0 !important;
+}
+
+.mx, .mx-0 {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+@each $key, $value in $spacings {
+    @each $abbr, $property in $properties {
+        @each $dirKey, $dirVal in $directions {
+
+            @if $dirVal != null and meta.type-of($dirVal) != list {
+                .#{$abbr}#{$dirKey}-#{$key} {
+                    #{$property}-#{$dirVal}: #{$value} !important;
+                }
+            } @else if meta.type-of($dirVal) == list {
+                .#{$abbr}#{$dirKey}-#{$key} {
+                    @each $d in $dirVal {
+                        #{$property}-#{$d}: #{$value} !important;
+                    }
+                }
+            } @else {
+                .#{$abbr}-#{$key} {
+                    #{$property}: #{$value} !important;
+                }
+            }
+        }
+    }
+}
