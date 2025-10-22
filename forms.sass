@@ -1,105 +1,67 @@
-$form: map-get($forms, 'form')
-$form-row: map-get($forms, 'form__row')
-$form-row-submit: map-get($forms, 'form__row--submit')
-$form-label: map-get($forms, 'form__label')
-$form-text: map-get($forms, 'form__text')
+/*
+    forms.sass
 
-.form,
-.form__row,
-.form__row--submit
-    overflow: hidden
-    position: relative
+@use "sass:map"
+@use "config" as *
+@use 'mixins' as *
+
+$form__row: map.get($forms, 'form__row')
+$form__row--submit: map.get($forms, 'form__row--submit')
+$form__label: map.get($forms, 'form__label')
+$form__text: map.get($forms, 'form__text')
 
 .form
-    margin: map-get($form, margin)
+    &__row
+        position: relative
 
-.form__row
-    margin: map-get($form-row, margin)
+        & + &
+            margin: map.get($form__row, margin)
 
-.form__field
-   margin: 10px 0 !important
+    &__field
+        &.form__field--submit
+            text-align: map.get($form__row--submit, text-align)
 
-.form__field--required
-    position: relative
+        p
+            margin: 0
 
-    &:before
-        content: '*'
-        position: absolute
-        top: 7px
-        left: 29px
+    &__label
+        display: inline-block
+        padding: map.get($form__label, padding)
+        font-weight: map.get($form__label, font-weight)
+        color: map.get($form__label, color)
+        background-color: map.get($form__label, background-color)
+        position: relative
+        left: 10px
+        bottom: 0
+        cursor: pointer
         z-index: 1
-        color: #ec8d8d
+        transform: translateY(50%)
 
-    .form__text
-        padding-left: 30px !important
+    &__required
+        color: color('error')
 
-.form__text,
-.form__checkbox,
-.form__radio
-    margin: 0
+    &__text,
+    &__textarea,
+    &__select
+        display: block
+        width: 100%
+        height: map.get($form__text, height)
+        padding: map.get($form__text, padding)
+        font-family: map.get($form__text, font-family)
+        font-weight: map.get($form__text, font-weight)
+        font-size: map.get($form__text, font-size)
+        color: nth(nth(map.get($form__text, colors), 1), 4)
+        background-color: nth(nth(map.get($form__text, colors), 1), 2)
+        border-width: nth(nth(map.get($form__text, colors), 1), 5)
+        border-style: nth(nth(map.get($form__text, colors), 1), 6)
+        border-color: nth(nth(map.get($form__text, colors), 1), 7)
+        border-radius: nth(nth(map.get($form__text, radius), 1), 2)
+        +transition
 
-.form__text
-    position: relative
-    display: block
-    width: 100%
-    font-family: map-get($form-text, font-family)
-    font-weight: map-get($form-text, font-weight)
-    font-style: map-get($form-text, font-style)
-    text-align: map-get($form-text, text-align)
-    font-size: nth(nth(map-get($form-text, 'sizes'),1),2)
-    padding: nth(nth(map-get($form-text, 'sizes'),1),3)
-    color: nth(nth(map-get($form-text, 'colors'),1),2)
-    background-color: nth(nth(map-get($form-text, 'colors'),1),3)
-    border-width: nth(nth(map-get($form-text, 'colors'),1),4)
-    border-style: nth(nth(map-get($form-text, 'colors'),1),5)
-    border-color: nth(nth(map-get($form-text, 'colors'),1),6)
-    border-radius: nth(nth(map-get($form-text, 'radius'),1),2)
-    outline-style: none
-    box-shadow: none
-    overflow: hidden
-    +transition
+        &:hover,
+        &:focus,
+        &:active
+            background-color: nth(nth(map.get($form__text, colors), 1), 3) !important
 
-input.form__text
-    height: map-get($form-text, height)
-    line-height: 1
-
-textarea.form__text
-    height: map-get($form-text, height-textarea)
-
-// sizes modifiers
-$i: 0
-@each $sizes in map-get($form-text, 'sizes')
-
-    @if $i != 0
-
-        .#{nth($sizes,1)}
-            font-size: #{nth($sizes,2)}
-            padding: #{nth($sizes,3)}
-
-    $i: $i + 1
-
-// colors modifiers
-$i: 0
-@each $colors in map-get($form-text, 'colors')
-
-    @if $i != 0
-
-        .#{nth($colors,1)}
-            background-color: #{nth($colors,2)}
-            color: #{nth($colors,3)}
-            border-width: #{nth($colors,4)}
-            border-style: #{nth($colors,5)}
-            border-color: #{nth($colors,6)}
-
-    $i: $i + 1
-
-// radius modifiers
-$i: 0
-@each $radius in map-get($form-text, 'radius')
-
-    @if $i != 0
-
-        .#{nth($radius,1)}
-            border-radius: #{nth($radius,2)}
-
-    $i: $i + 1
+    &__textarea
+        height: map.get($form__text, height-textarea)

@@ -1,0 +1,68 @@
+/*
+    forms_select2.sass
+
+@use "sass:map"
+@use "config" as *
+@use 'mixins' as *
+
+$form__text: map.get($forms, 'form__text')
+$form__select: map.get($forms, 'form__select')
+
+select
+    color: transparent !important
+    appearance: none
+
+.select2-container--default
+    &.select2-container--open
+        .select2-selection--single
+            background-color: nth(nth(map.get($form__text, colors), 1), 3) !important
+
+    .select2-selection--single
+        height: map.get($form__text, height)
+        border-width: nth(nth(map.get($form__text, colors), 1), 5)
+        border-style: nth(nth(map.get($form__text, colors), 1), 6)
+        border-color: nth(nth(map.get($form__text, colors), 1), 7)
+        border-radius: nth(nth(map.get($form__text, radius), 1), 2)
+        +transition
+
+        &:hover
+            background-color: nth(nth(map.get($form__text, colors), 1), 3) !important
+
+        .select2-selection__rendered
+            padding-top: map.get($form__select, selection-rendered-padding-top)
+            font-weight: map.get($form__text, font-weight)
+            color: nth(nth(map.get($form__text, colors), 1), 4)
+
+        .select2-selection__arrow
+            top: 0
+            right: 0
+            height: map.get($form__text, height)
+            width: map.get($form__text, height)
+
+            b
+                display: block
+                border: 0 none
+                width: 100%
+                height: 100%
+                top: 0
+                left: 0
+                margin: 0
+                line-height: map.get($form__text, height)
+                text-align: center
+                color: nth(nth(map.get($form__text, colors), 1), 7)
+
+                &:before
+                    content: map.get($form__select, arrow-icon)
+                    font-family: 'fontello'
+
+    .select2-results > .select2-results__options
+        background-color: nth(nth(map.get($form__text, colors), 1), 3)
+        max-height: map.get($form__select, results-options-max-height)
+
+    .select2-results__option--highlighted.select2-results__option--selectable
+        background-color: map.get($form__select, option-selectable-background-color)
+
+.select2-dropdown
+    border-width: nth(nth(map.get($form__text, colors), 1), 5)
+    border-style: nth(nth(map.get($form__text, colors), 1), 6)
+    border-color: nth(nth(map.get($form__text, colors), 1), 7)

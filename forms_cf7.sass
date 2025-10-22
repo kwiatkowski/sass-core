@@ -1,13 +1,17 @@
+/*
+    forms_cf7.sass
+
 @use "sass:map"
-@use '../config' as *
+@use "config" as *
 @use 'mixins' as *
 
 $response-output: map.get($contact_form, 'response-output')
 $not-valid-tip: map.get($contact_form, 'not-valid-tip')
+$list-item: map.get($contact_form, 'list-item')
 $list-item-label: map.get($contact_form, 'list-item-label')
 $list-item-label-block: map.get($contact_form, 'list-item-label-block')
 
-.wpcf7
+html .wpcf7
     form
         .wpcf7-response-output
             display: none
@@ -53,7 +57,12 @@ $list-item-label-block: map.get($contact_form, 'list-item-label-block')
         .wpcf7-list-item
             margin: 0
 
+            input[type="checkbox"]
+                margin: map.get($list-item, margin)
+                float: map.get($list-item, float)
+
         .wpcf7-list-item-label
+            padding-left: map.get($list-item-label, padding-left)
             font-size: map.get($list-item-label, font-size)
             font-weight: map.get($list-item-label, font-weight)
             color: map.get($list-item-label, color)
@@ -64,9 +73,11 @@ $list-item-label-block: map.get($contact_form, 'list-item-label-block')
                 font-weight: map.get($list-item-label-block, font-weight)
                 color: map.get($list-item-label-block, color)
                 margin-left: map.get($list-item-label-block, margin-left)
+                max-width: map.get($list-item-label-block, max-width)
 
         .wpcf7-spinner
             position: absolute
             top: 50%
+            left: 0
             transform: translateY(-50%)
             margin: 0 10px
