@@ -8,6 +8,7 @@
 $form__row: map.get($forms, 'form__row')
 $form__row--submit: map.get($forms, 'form__row--submit')
 $form__label: map.get($forms, 'form__label')
+$form__required: map.get($forms, 'required')
 $form__text: map.get($forms, 'form__text')
 
 .form
@@ -22,23 +23,26 @@ $form__text: map.get($forms, 'form__text')
             text-align: map.get($form__row--submit, text-align)
 
         p
-            margin: 0
+            margin: 0 !important
 
     &__label
         display: inline-block
         padding: map.get($form__label, padding)
+        margin: map.get($form__label, margin)
         font-weight: map.get($form__label, font-weight)
         color: map.get($form__label, color)
         background-color: map.get($form__label, background-color)
         position: relative
         left: 10px
         bottom: 0
+        transform: map.get($form__label, transform)
         cursor: pointer
         z-index: 1
-        transform: translateY(50%)
 
     &__required
-        color: color('error')
+        display: inline-block
+        margin-left: 3px
+        color: map.get($form__required, color)
 
     &__text,
     &__textarea,
@@ -65,3 +69,14 @@ $form__text: map.get($forms, 'form__text')
 
     &__textarea
         height: map.get($form__text, height-textarea)
+
+    &__text,
+    &__textarea
+        &:focus
+            outline: none
+
+            @if map.has-key($form__text, colors) and length(map.get($form__text, colors)) >= 1
+                $color-list: map.get($form__text, colors)
+
+                @if length(nth($color-list, 1)) >= 8
+                    border-color: nth(nth($color-list, 1), 8)
