@@ -15,6 +15,11 @@ $form__text: map.get($forms, 'form__text')
     &__row
         position: relative
 
+        &::after
+            content: ""
+            display: table
+            clear: both
+
         & + &
             margin: map.get($form__row, margin)
 
