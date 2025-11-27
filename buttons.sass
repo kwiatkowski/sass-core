@@ -6,6 +6,7 @@
 @use "sass:color"
 @use "sass:list"
 @use "config" as *
+@use 'mixins' as *
 
 .btn
     display: inline-block
@@ -22,6 +23,9 @@
 
     & + .btn
         margin-left: 10px
+
+        +media-breakpoint-down(sm)
+            margin-top: 10px
 
     &.btn--disabled,
     &[disabled]
